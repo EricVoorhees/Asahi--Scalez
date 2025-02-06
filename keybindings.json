@@ -1,0 +1,38 @@
+{
+    "binding1": {
+        "name": "Super+Up",
+        "action": "maximize"
+    },
+    "binding2": {
+        "name": "Super+Down",
+        "action": "unmaximize"
+    },
+    "binding3": {
+        "name": "Super+Left",
+        "action": "tile_left"
+    },
+    "binding4": {
+        "name": "Super+Right",
+        "action": "tile_right"
+    },
+    "binding5": {
+        "name": "Super+T",
+        "action": "open_terminal"
+    },
+    "binding6": {
+        "name": "Super+E",
+        "action": "open_explorer"
+    },
+    "binding7": {
+        "name": "Super+M",
+        "action": "maximize_window"
+    },
+    "binding8": {
+        "name": "Super+W",
+        "action": "close_window"
+    },
+    "binding9": {
+        "name": "Super+Y",
+        "action": "toggle_extensions"
+    }
+}
