@@ -1,6 +1,9 @@
 
 #!/bin/bash
 
+# Ensure the script is executable
+chmod +x $0
+
 # Function to check internet connectivity
 check_internet() {
     echo "Checking internet connection..."
