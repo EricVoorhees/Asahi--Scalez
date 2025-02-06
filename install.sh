@@ -1,77 +1,116 @@
 #!/bin/bash
 
-
+# Define colors for output messages
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 RED='\033[0;31m'
-NC='\033[0m' # No color
+NC='\033[0m'  # No Color
 
-LOGFILE="/var/log/asahi-scalez-install.log"
-exec > >(tee -a "$LOGFILE") 2>&1  # Log output for debugging
+# Function to check for internet connection
+check_internet() {
+    echo -n "Checking for internet connection..."
+    if ping -q -c 1 -W 1 google.com >/dev/null; then
+        echo -e "${GREEN}Internet connection is active.${NC}"
+    else
+        echo -e "${RED}No internet connection. Exiting.${NC}"
+        exit 1
+    fi
+}
 
-echo -e "${GREEN}Welcome to Asahi-Scalez: Pop!_OS-Style GNOME for Fedora Asahi Remix 41${NC}"
+# Function to install required dependencies
+install_dependencies() {
+    echo -e "${YELLOW}Installing required dependencies...${NC}"
+    sudo apt update
+    sudo apt install -y gnome-shell-extensions \
+        gnome-tweaks \
+        dconf-cli \
+        gnome-shell \
+        adwaita-icon-theme-full \
+        gnome-shell-extension-dash-to-dock \
+        gnome-shell-extension-pop-shell
+    if [ $? -eq 0 ]; then
+        echo -e "${GREEN}Dependencies installed successfully.${NC}"
+    else
+        echo -e "${RED}Failed to install dependencies. Exiting.${NC}"
+        exit 1
+    fi
+}
 
-# Ensure script runs with sudo
-if [[ $EUID -ne 0 ]]; then
-    echo -e "${RED}This script must be run as root (use sudo).${NC}"
-    exit 1
-fi
+# Function to install Pp Shell Extensions
+install_extensions() {
+    echo -e "${YELLOW}Installing Pp Shell extensions...${NC}"
+    gnome-extensions enable pp-shell@system76.com
+    gnome-extensions enable dash-to-dock@micxgx.gmail.com
+    if [ $? -eq 0 ]; then
+        echo -e "${GREEN}Pp Shell extensions installed successfully.${NC}"
+    else
+        echo -e "${RED}Failed to install extensions. Exiting.${NC}"
+        exit 1
+    fi
+}
 
-# Early internet connection check
-echo -e "${GREEN}Checking internet connection...${NC}"
-if ! ping -q -c 1 -W 1 google.com >/dev/null; then
-    echo -e "${RED}No internet connection detected! Please connect and try again.${NC}"
-    exit 1
-fi
-
-# Ask for confirmation before proceeding
-read -p "Do you want to install Asahi-Scalez and configure everything? (y/n): " choice
-if [[ "$choice" != "y" && "$choice" != "Y" ]]; then
-    echo -e "${YELLOW}Installation aborted.${NC}"
-    exit 0
-fi
-
-# Update system and install required packages
-echo -e "${GREEN}Updating system and installing required packages...${NC}"
-dnf update -y || { echo -e "${RED}System update failed!${NC}"; exit 1; }
-dnf install -y gnome-shell-extensions gnome-tweaks dconf-cli jq git make npm gnome-shell-extension-pop-shell gnome-shell-extension-dash-to-dock || { echo -e "${RED}Failed to install dependencies!${NC}"; exit 1; }
-
-# Install Pp Shell manually if missing
-if ! gnome-extensions list | grep -q "pop-shell@system76.com"; then
-    echo -e "${GREEN}Installing Pp Shell manually...${NC}"
-    mkdir -p ~/.local/share/gnome-shell/extensions
-    git clone https://github.com/pop-os/shell.git ~/pop-shell
-    cd ~/pop-shell
-    make local-install || { echo -e "${RED}Pp Shell installation failed!${NC}"; exit 1; }
-    cd ..
-    rm -rf ~/pop-shell
-else
-    echo -e "${YELLOW}Pp Shell is already installed.${NC}"
-fi
-
-# Restore GNOME settings from dconf backup if available
-if [ -f "configs/gnome-settings.conf" ]; then
-    echo -e "${GREEN}Restoring GNOME settings...${NC}"
+# Function to configure GNOME settings
+configure_gnome_settings() {
+    echo -e "${YELLOW}Configuring GNOME settings...${NC}"
     dconf load / < configs/gnome-settings.conf
-else
-    echo -e "${RED}Warning: gnome-settings.conf not found. Skipping restore.${NC}"
+    if [ $? -eq 0 ]; then
+        echo -e "${GREEN}GNOME settings configured successfully.${NC}"
+    else
+        echo -e "${RED}Failed to configure GNOME settings. Exiting.${NC}"
+        exit 1
+    fi
+}
+
+# Function to configure keybindings
+configure_keybindings() {
+    echo -e "${YELLOW}Configuring keybindings...${NC}"
+    dconf load / < configs/pp-shell-shortcuts.conf
+    if [ $? -eq 0 ]; then
+        echo -e "${GREEN}Keybindings configured successfully.${NC}"
+    else
+        echo -e "${RED}Failed to configure keybindings. Exiting.${NC}"
+        exit 1
+    fi
+}
+
+# Prompt to install the project
+echo -e "${YELLOW}This will install and configure the Asahi-Scalez project. Do you want to continue? (y/n)${NC}"
+read -r install_confirmation
+if [[ ! "$install_confirmation" =~ ^[Yy]$ ]]; then
+    echo -e "${RED}Installation aborted.${NC}"
+    exit 1
 fi
 
-# Enable GNOME Extensions
-echo -e "${GREEN}Enabling Pp Shell and Dash to Dock extensions...${NC}"
-gnome-extensions enable pop-shell@system76.com || { echo -e "${RED}Failed to enable Pp Shell!${NC}"; }
-gnome-extensions enable dash-to-dock@micxgx.gmail.com || { echo -e "${RED}Failed to enable Dash to Dock!${NC}"; }
+# Check internet connection
+check_internet
 
-# Enable trackpad gestures
-echo -e "${GREEN}Enabling trackpad gestures...${NC}"
-gsettings set org.gnome.desktop.peripherals.touchpad tap-to-click true
-gsettings set org.gnome.desktop.peripherals.touchpad natural-scroll true
+# Prompt for enabling features
+echo -e "${YELLOW}Do you want to enable all features (including Pop Shell)? (y/n)${NC}"
+read -r enable_features_confirmation
+if [[ ! "$enable_features_confirmation" =~ ^[Yy]$ ]]; then
+    echo -e "${RED}Features will not be enabled. Exiting.${NC}"
+    exit 1
+fi
 
-# Configure Pp Shell shortcuts
-echo -e "${GREEN}Configuring Pp Shell keyboard shortcuts...${NC}"
-gsettings set org.gnome.shell.extensions.pop-shell activate-launcher "<Super>Space"
-gsettings set org.gnome.shell.extensions.pop-shell cycle-tiling "<Super>Enter"
+# Install dependencies
+install_dependencies
 
-# Final confirmation before reboot
-read -p "Installation complete! Press Enter to reboot your system."  
-reboot
+# Install extensions
+install_extensions
+
+# Configure GNOME settings
+configure_gnome_settings
+
+# Configure keybindings
+configure_keybindings
+
+# Prompt to reboot the system
+echo -e "${YELLOW}Installation is complete. Press Enter to reboot the system.${NC}"
+read -r reboot_confirmation
+if [[ "$reboot_confirmation" =~ ^[Yy]$ || -z "$reboot_confirmation" ]]; then
+    sudo reboot
+else
+    echo -e "${RED}Reboot aborted. Please reboot manually to apply the changes.${NC}"
+    exit 1
+fi
+
