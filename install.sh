@@ -1,111 +1,63 @@
 #!/bin/bash
 
-# Define colors for output
-RED='\033[0;31m'
-GREEN='\033[0;32m'
-YELLOW='\033[0;33m'
-NC='\033[0m'  # No Color
-
-# Check internet connection
-check_internet_connection() {
-    echo -e "${YELLOW}Checking internet connection...${NC}"
+# Function to check internet connectivity
+check_internet() {
+    echo "Checking internet connection..."
     if ! ping -c 1 google.com &>/dev/null; then
-        echo -e "${RED}No internet connection detected. Exiting.${NC}"
-        exit 1
-    else
-        echo -e "${GREEN}Internet connection detected.${NC}"
-    fi
-}
-
-# Ask if user wants to install Asahi-Scalez
-confirm_installation() {
-    read -p "Do you want to install Asahi-Scalez? (y/n): " install_choice
-    if [[ "$install_choice" != "y" ]]; then
-        echo -e "${RED}Installation aborted.${NC}"
-        exit 1
-    else
-        echo -e "${GREEN}Proceeding with installation...${NC}"
-    fi
-}
-
-# Install Auto Tiling extension for GNOME
-install_tiling_extensions() {
-    echo -e "${YELLOW}Installing Auto Tiling extension...${NC}"
-    gnome-extensions install auto-tiling@github.com
-    gnome-extensions enable auto-tiling@github.com
-    if [ $? -eq 0 ]; then
-        echo -e "${GREEN}Auto Tiling extension installed and enabled.${NC}"
-    else
-        echo -e "${RED}Failed to install Auto Tiling extension. Exiting.${NC}"
+        echo -e "\033[31mNo internet connection detected! Exiting...\033[0m"
         exit 1
     fi
 }
 
-# Install Pop Shell extensions and dependencies
-install_pop_shell() {
-    echo -e "${YELLOW}Installing Pop Shell...${NC}"
-    sudo apt install -y gnome-shell-extension-pop-shell
-    gnome-extensions enable pop-shell@system76.com
-    if [ $? -eq 0 ]; then
-        echo -e "${GREEN}Pop Shell installed and enabled.${NC}"
-    else
-        echo -e "${RED}Failed to install Pop Shell extension. Exiting.${NC}"
-        exit 1
+# Function to ask for user confirmation before proceeding
+ask_for_confirmation() {
+    read -p "$1 (y/n): " answer
+    if [[ "$answer" != "y" ]]; then
+        echo "Installation aborted!"
+        exit 0
     fi
 }
 
-# Setup GNOME settings (including keybindings and workspace behavior)
-configure_gnome_settings() {
-    echo -e "${YELLOW}Configuring GNOME settings...${NC}"
+# Confirm installation
+ask_for_confirmation "Do you want to install Asahi-Scalez and proceed with the setup?"
 
-    # Enable smooth tiling and set theme and workspace options
-    gnome-extensions enable auto-tiling@github.com
-    gnome-shell-extension-tool -e 'pop-shell@system76.com'
+# Start the installation process
+echo "Starting Asahi-Scalez installation..."
 
-    # Set smooth window dragging (snap-to-edge) and workspace creation
-    gsettings set org.gnome.desktop.wm.preferences theme 'Adwaita-dark'
-    gsettings set org.gnome.desktop.wm.preferences action-middle-click-titlebar 'minimize'
-    gsettings set org.gnome.desktop.wm.preferences snapping-enabled true
-    gsettings set org.gnome.desktop.wm.preferences workspace-creation true
+# Check for internet connectivity before proceeding
+check_internet
 
-    echo -e "${GREEN}GNOME settings configured.${NC}"
-}
+# Ask user for confirmation to install dependencies
+ask_for_confirmation "Do you want to install necessary dependencies and extensions?"
 
-# Configure keybindings for window tiling and snapping (PopOS-like)
-configure_keybindings() {
-    echo -e "${YELLOW}Configuring keybindings for window tiling...${NC}"
+# Update the system and install dependencies
+echo "Installing necessary dependencies..."
+sudo apt update -y
+sudo apt install -y gnome-shell-extensions tilix gnome-shell python3-pip curl
 
-    # PopOS-like keybindings for tiling and window navigation
-    gsettings set org.gnome.desktop.wm.keybindings tile-left "['<Super>Left']"
-    gsettings set org.gnome.desktop.wm.keybindings tile-right "['<Super>Right']"
-    gsettings set org.gnome.desktop.wm.keybindings tile-up "['<Super>Up']"
-    gsettings set org.gnome.desktop.wm.keybindings tile-down "['<Super>Down']"
-    gsettings set org.gnome.desktop.wm.keybindings toggle-tiling "['<Super>y']"
+# Install the Pop Shell extension (Pp Shell)
+echo "Installing Pop Shell extension..."
+gnome-extensions install https://extensions.gnome.org/extension/2899/pop-shell/
 
-    # Add keybindings for additional functionality (like window focus and workspace switching)
-    gsettings set org.gnome.desktop.wm.keybindings switch-to-next-window "['<Super>Tab']"
-    gsettings set org.gnome.desktop.wm.keybindings switch-to-previous-window "['<Super><Shift>Tab']"
-    gsettings set org.gnome.desktop.wm.keybindings focus-previous "['<Super>Shift>Left']"
-    gsettings set org.gnome.desktop.wm.keybindings focus-next "['<Super>Shift>Right']"
+# Install the Auto-Tiling extension
+echo "Installing Auto-Tiling extension..."
+gnome-extensions install https://extensions.gnome.org/extension/38/auto-tiling/
 
-    echo -e "${GREEN}Keybindings configured.${NC}"
-}
+# Enable the installed extensions
+echo "Enabling Pop Shell and Auto-Tiling extensions..."
+gnome-extensions enable pop-shell@system76.com
+gnome-extensions enable auto-tiling@gnome-shell-extensions.gcampax.github.com
 
-# Main script execution
-main() {
-    check_internet_connection
-    confirm_installation
-    install_tiling_extensions
-    install_pop_shell
-    configure_gnome_settings
-    configure_keybindings
+# Apply keybindings configuration
+echo "Applying keybinding configuration..."
+mkdir -p ~/.config/gnome-shell/
+cp keybindings.json ~/.config/gnome-shell/keybindings.json
 
-    echo -e "${GREEN}All components installed and configured. Press Enter to reboot...${NC}"
-    read
-    echo -e "${YELLOW}Rebooting system now...${NC}"
-    sudo reboot
-}
+# Reload GNOME Shell to apply changes
+echo "Reloading GNOME Shell..."
+gnome-shell --replace &
 
-# Run the main function
-main
-
+# Finalize installation and prompt user to reboot
+echo -e "\033[32mInstallation complete! Press Enter to reboot your system.\033[0m"
+read -p "Press Enter to reboot..."
+reboot
