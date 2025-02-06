@@ -1,6 +1,6 @@
 #!/bin/bash
 
-
+# Define colors for output
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[0;33m'
@@ -71,17 +71,22 @@ configure_gnome_settings() {
     echo -e "${GREEN}GNOME settings configured.${NC}"
 }
 
-# Configure keybindings for window tiling and snapping
+# Configure keybindings for window tiling and snapping (PopOS-like)
 configure_keybindings() {
     echo -e "${YELLOW}Configuring keybindings for window tiling...${NC}"
 
+    # PopOS-like keybindings for tiling and window navigation
     gsettings set org.gnome.desktop.wm.keybindings tile-left "['<Super>Left']"
     gsettings set org.gnome.desktop.wm.keybindings tile-right "['<Super>Right']"
     gsettings set org.gnome.desktop.wm.keybindings tile-up "['<Super>Up']"
     gsettings set org.gnome.desktop.wm.keybindings tile-down "['<Super>Down']"
     gsettings set org.gnome.desktop.wm.keybindings toggle-tiling "['<Super>y']"
+
+    # Add keybindings for additional functionality (like window focus and workspace switching)
     gsettings set org.gnome.desktop.wm.keybindings switch-to-next-window "['<Super>Tab']"
     gsettings set org.gnome.desktop.wm.keybindings switch-to-previous-window "['<Super><Shift>Tab']"
+    gsettings set org.gnome.desktop.wm.keybindings focus-previous "['<Super>Shift>Left']"
+    gsettings set org.gnome.desktop.wm.keybindings focus-next "['<Super>Shift>Right']"
 
     echo -e "${GREEN}Keybindings configured.${NC}"
 }
