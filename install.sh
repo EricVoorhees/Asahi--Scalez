@@ -1,3 +1,4 @@
+
 #!/bin/bash
 
 # Function to check internet connectivity
