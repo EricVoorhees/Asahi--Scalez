@@ -12,7 +12,7 @@
 -
 -
 -
--     ![Asahi-Scalez vs Normal GNOME](images/FeaturesShowcase.gif)
+-     ![Asahi-Scalez vs Normal GNOME](images/FeaturesShowcase.mp4)
 
 -
 -
