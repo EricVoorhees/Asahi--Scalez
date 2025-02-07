@@ -9,7 +9,7 @@
   </tr>
   <tr>
     <td>
-      <iframe width="400" height="225" src="https://www.youtube.com/embed/YOUR_VIDEO_ID_1" frameborder="0" allowfullscreen></iframe>
+      <iframe width="400" height="225" src="https://i.imgur.com/ofFuwXS.gif" frameborder="0" allowfullscreen></iframe>
     </td>
     <td>
       <a href="https://imgur.com/ofFuwXS"><img src="https://i.imgur.com/ofFuwXS.gif" title="source: imgur.com" /></a>
