@@ -14,7 +14,7 @@ curl -sL bit.ly/asahi-scalez | bash
 -
 -
 -
--     ![Asahi-Scalez vs Normal GNOME](images/FeaturesShowcase.mp4)
+-    <blockquote class="imgur-embed-pub" lang="en" data-id="a/b2Cg5ZK"  ><a href="//imgur.com/a/b2Cg5ZK">AS Ver 0.2</a></blockquote><script async src="//s.imgur.com/min/embed.js" charset="utf-8"></script>
 
 -
 -
