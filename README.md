@@ -21,8 +21,8 @@
 Copy and run this command in your terminal:
 
 <div style="display: flex; align-items: center;">
-  <pre id="install-command"><code>curl -sL bit.ly/asahi-scalez | bash</code></pre>
   📋 Copy
+  <pre id="install-command"><code>curl -sL bit.ly/asahi-scalez | bash</code></pre>
   <button onclick="copyToClipboard()" style="margin-left: 10px; padding: 5px; background-color: #007bff; color: white; border: none; cursor: pointer;">
   </button>
 </div>
