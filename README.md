@@ -12,18 +12,17 @@
       <iframe width="400" height="225" src="https://www.youtube.com/embed/YOUR_VIDEO_ID_1" frameborder="0" allowfullscreen></iframe>
     </td>
     <td>
-      <a href="https://imgur.com/ofFuwXS">
-        <img src="https://i.imgur.com/ofFuwXS.gif" width="400" height="225" alt="Asahi-Scalez Showcase">
-      </a>
+      <iframe width="400" height="225" src="https://www.youtube.com/embed/OUm2gogarlw" frameborder="0" allowfullscreen></iframe>
     </td>
   </tr>
 </table>
 
----
-
 ## 🚀 Install Asahi-Scalez  
-
 Copy and run this command in your terminal:
 
-```bash
-curl -sL bit.ly/asahi-scalez | bash
+<div style="display: flex; align-items: center;">
+  📋 Copy
+  <pre id="install-command"><code>curl -sL bit.ly/asahi-scalez | bash</code></pre>
+  <button onclick="copyToClipboard()" style="margin-left: 10px; padding: 5px; background-color: #007bff; color: white; border: none; cursor: pointer;">
+  </button>
+</div>
