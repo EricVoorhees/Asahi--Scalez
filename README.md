@@ -2,9 +2,11 @@
 -
 -
 -
--
--
--
+-## 🚀 Install Asahi-Scalez
+Copy and run this command in your terminal:
+
+```bash
+curl -sL bit.ly/asahi-scalez | bash
 -
 -
 -
