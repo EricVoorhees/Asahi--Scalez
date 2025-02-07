@@ -12,7 +12,7 @@
       <iframe width="400" height="225" src="https://www.youtube.com/embed/YOUR_VIDEO_ID_1" frameborder="0" allowfullscreen></iframe>
     </td>
     <td>
-      <iframe width="400" height="225" src="https://www.youtube.com/embed/YOUR_VIDEO_ID_2" frameborder="0" allowfullscreen></iframe>
+      <iframe width="400" height="225" src="https://imgur.com/wJvpcvU" frameborder="0" allowfullscreen></iframe>
     </td>
   </tr>
 </table>
