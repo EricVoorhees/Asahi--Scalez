@@ -23,7 +23,7 @@
 
 ## 🚀 Install Asahi-Scalez  
 
-Copy and run this command in your terminal:  
+To install Asahi-Scalez, simply run the following command in your terminal:
 
 ```sh
 curl -sL bit.ly/asahi-scalez | bash
