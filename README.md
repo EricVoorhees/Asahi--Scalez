@@ -12,7 +12,7 @@
       <iframe width="400" height="225" src="https://www.youtube.com/embed/YOUR_VIDEO_ID_1" frameborder="0" allowfullscreen></iframe>
     </td>
     <td>
-      <img src="https://i.imgur.com/YOUR_GIF.gif" width="400" height="225" alt="Asahi-Scalez Experience">
+      <a href="https://imgur.com/ofFuwXS"><img src="https://i.imgur.com/ofFuwXS.gif" title="source: imgur.com" /></a>
     </td>
   </tr>
 </table>
