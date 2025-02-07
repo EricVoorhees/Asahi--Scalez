@@ -19,21 +19,11 @@
   </tr>
 </table>
 
+---
+
 ## 🚀 Install Asahi-Scalez  
+
 Copy and run this command in your terminal:
 
-<div style="display: flex; align-items: center;">
-  <pre id="install-command"><code>curl -sL bit.ly/asahi-scalez | bash</code></pre>
-  <button onclick="copyToClipboard()" style="margin-left: 10px; padding: 5px; background-color: #007bff; color: white; border: none; cursor: pointer;">
-    📋 Copy
-  </button>
-</div>
-
-<script>
-  function copyToClipboard() {
-    const codeBlock = document.getElementById("install-command").innerText;
-    navigator.clipboard.writeText(codeBlock).then(() => {
-      alert("Command copied to clipboard!");
-    });
-  }
-</script>
+```bash
+curl -sL bit.ly/asahi-scalez | bash
