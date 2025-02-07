@@ -27,11 +27,3 @@ Copy and run this command in your terminal:
   </button>
 </div>
 
-<script>
-  function copyToClipboard() {
-    const codeBlock = document.getElementById("install-command").innerText;
-    navigator.clipboard.writeText(codeBlock).then(() => {
-      alert("Command copied to clipboard!");
-    });
-  }
-</script>
