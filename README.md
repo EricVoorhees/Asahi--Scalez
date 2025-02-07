@@ -1,6 +1,6 @@
 # Asahi-Scalez: Optimized GNOME for Fedora Asahi Remix  
 
-## 🔥 See the Difference: Before vs. After  
+## 🔥 See the Difference: Before vs. After  🔥
 
 <table>
   <tr>
