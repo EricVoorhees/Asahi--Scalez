@@ -10,7 +10,7 @@
   <tr>
     <td align="center">
       <a href="https://youtu.be/UBdIFiRa50Y?si=etVo1jKLhuEeJlcO" target="_blank">
-        <img src="https://youtu.be/UBdIFiRa50Y?si=etVo1jKLhuEeJlcO.jpg" width="400" alt="Default GNOME Experience">
+        <img src="https://youtu.be/UBdIFiRa50Y?si=etVo1jKLhuEeJlcO/0.jpg" width="400" alt="Default GNOME Experience">
       </a>
     </td>
     <td align="center">
