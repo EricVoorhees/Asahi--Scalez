@@ -12,7 +12,7 @@
       <iframe width="400" height="225" src="https://www.youtube.com/embed/YOUR_VIDEO_ID_1" frameborder="0" allowfullscreen></iframe>
     </td>
     <td>
-      <iframe width="400" height="225" src="//imgur.com/a/FQbBALX" frameborder="0" allowfullscreen></iframe>
+      <img src="https://i.imgur.com/YOUR_GIF.gif" width="400" height="225" alt="Asahi-Scalez Experience">
     </td>
   </tr>
 </table>
@@ -21,9 +21,17 @@
 Copy and run this command in your terminal:
 
 <div style="display: flex; align-items: center;">
-  📋 Copy
   <pre id="install-command"><code>curl -sL bit.ly/asahi-scalez | bash</code></pre>
   <button onclick="copyToClipboard()" style="margin-left: 10px; padding: 5px; background-color: #007bff; color: white; border: none; cursor: pointer;">
+    📋 Copy
   </button>
 </div>
 
+<script>
+  function copyToClipboard() {
+    const codeBlock = document.getElementById("install-command").innerText;
+    navigator.clipboard.writeText(codeBlock).then(() => {
+      alert("Command copied to clipboard!");
+    });
+  }
+</script>
