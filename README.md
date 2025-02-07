@@ -8,21 +8,22 @@
     <td align="center"><strong>GNOME with Asahi-Scalez</strong></td>
   </tr>
   <tr>
-    <td>
-      <iframe width="400" height="225" src="https://www.youtube.com/embed/YOUR_VIDEO_ID_1" frameborder="0" allowfullscreen></iframe>
+    <td align="center">
+      <a href="https://www.youtube.com/watch?v=YOUR_VIDEO_ID_1" target="_blank">
+        <img src="https://img.youtube.com/vi/YOUR_VIDEO_ID_1/0.jpg" width="400" alt="Default GNOME Experience">
+      </a>
     </td>
-    <td>
-      <iframe width="400" height="225" src="https://www.youtube.com/embed/OUm2gogarlw" frameborder="0" allowfullscreen></iframe>
+    <td align="center">
+      <a href="https://www.youtube.com/watch?v=OUm2gogarlw" target="_blank">
+        <img src="https://img.youtube.com/vi/OUm2gogarlw/0.jpg" width="400" alt="Asahi-Scalez Experience">
+      </a>
     </td>
   </tr>
 </table>
 
 ## 🚀 Install Asahi-Scalez  
-Copy and run this command in your terminal:
 
-<div style="display: flex; align-items: center;">
-  📋 Copy
-  <pre id="install-command"><code>curl -sL bit.ly/asahi-scalez | bash</code></pre>
-  <button onclick="copyToClipboard()" style="margin-left: 10px; padding: 5px; background-color: #007bff; color: white; border: none; cursor: pointer;">
-  </button>
-</div>
+Copy and run this command in your terminal:  
+
+```sh
+curl -sL bit.ly/asahi-scalez | bash
