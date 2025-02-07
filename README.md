@@ -27,17 +27,7 @@ Copy and run this command in your terminal:
 
 ```sh
 curl -sL bit.ly/asahi-scalez | bash
+```
 
 
-📖 Explanation
-Project Overview
-<div style="border: 2px solid #007bff; padding: 20px; border-radius: 10px; background-color: #f4f6f9;">
-
-The Asahi-Scalez project aims to provide an optimized and streamlined GNOME experience on Fedora Asahi Remix. It incorporates the most popular features from Pop!_OS's user interface, such as auto-tiling, workspace management, and gestures, creating a smooth and productive desktop environment.
-
-This project is designed for users who want an intuitive, customized, and fast desktop environment with minimal setup and maximum usability. Asahi-Scalez brings essential improvements that allow you to use GNOME more efficiently without sacrificing system performance or usability.
-
-Features:
-
-
-</div>
+<div style="border: 2px solid #007bff; padding: 20px; border-radius: 10px; background-color: #f4f6f9; margin-top: 20px;"> <h2><strong>Project Overview</strong></h2> <p><strong>The Asahi-Scalez project</strong> aims to provide an optimized and streamlined GNOME experience on Fedora Asahi Remix. It incorporates the most popular features from Pop!_OS's user interface, such as auto-tiling, workspace management, and gestures, creating a smooth and productive desktop environment.</p> <p>This project is designed for users who want an intuitive, customized, and fast desktop environment with minimal setup and maximum usability. Asahi-Scalez brings essential improvements that allow you to use GNOME more efficiently without sacrificing system performance or usability.</p> <p><strong>Features:</strong></p> <ul> <li>Pop!_OS-like GNOME experience</li> <li>Auto-tiling window management</li> <li>Workspace and gesture support</li> <li>Seamless integration with Fedora Asahi Remix</li> <li>Easy installation script for setting up everything</li> </ul> </div>
